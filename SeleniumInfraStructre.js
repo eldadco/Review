@@ -68,13 +68,16 @@ class seleniumInfra {
 
 
     async clickElement(locatorType, locatorValue, elem, fromElement = this.driver) {
+      
         let element
         try {
             if (elem) {
+                this.driver.sleep(2000)
                 await elem.click()
             }
             else {
                 element = await this.findEelem(locatorType, locatorValue, fromElement)
+               this.driver.sleep(2000)
                 await element.click()
                 console.log('Clicked on element with ' + locatorType + " == " + locatorValue)
 
@@ -82,8 +85,9 @@ class seleniumInfra {
             await this.driver.sleep(2000)
 
         }
-        catch (error) {
-            console.error('Got error while trying to click on element with ' + LocatorType + " : " + LocatorValue)
+        catch (error) 
+        {
+            console.error('Got error while trying to click on element with ' + locatorType + " : " + locatorValue)
         }
 
     }

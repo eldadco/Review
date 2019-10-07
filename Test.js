@@ -33,7 +33,7 @@ class TestSite {
         // console.log(movies_names[0]
         let details = [] // Will contain the an araay of objects that will represent the details under the main Details ul of each book 
         // let movies_Arr = [{ name, year, country, time }]
-        let detail = { name, year, country, time }
+        // let detail = { name, year, country, time }
         for (let i in movies_details) {
             let temp = await this.seleniumInfra.findElementListBy("tagName", "li", movies_details[i])
 
@@ -42,21 +42,10 @@ class TestSite {
                 let text = await this.seleniumInfra.getTextFromElement(null, null, temp[k])
                 if (text) {
 
-                    //details.push(text) // will contain details of all Woody Allen's movies 
-                    switch (text) {
-                        case byAlpha2:
-                            detail.country = text
-                            break
-                        case ('1h' in text):
-                            detail.time = text 
-                            break
-                        case(typeof(text) == String):
-                            detail.name == text
-                            break
-                        default:detail.year=text
+                    details.push(text) // will contain details of all Woody Allen's movies 
                     }
 
-                    await console.log(await this.seleniumInfra.getTextFromElement(null, null, temp[k]))
+                    await console.table(await this.seleniumInfra.getTextFromElement(null, null, temp[k]))
                 }
             }
 
@@ -69,7 +58,7 @@ class TestSite {
     }
 
 
-}
+
 let test = new TestSite()
-test.login() // For check facebook 
+// test.login() // For check facebook 
 test.Collect() //For work on Woody

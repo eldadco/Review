@@ -7,14 +7,15 @@ class HomePage {
 
         this.seleniumInfra = new InfraClass()
         this.driver = this.seleniumInfra.driver
-        // this.seleniumInfra.getURL(url)
-    }
-
-    async Get_Url(url) {
-
-        await this.seleniumInfra.getURL(url)
+         this.seleniumInfra.getURL(url)
 
     }
+
+    // async Get_Url(url) {
+
+    //     await this.seleniumInfra.getURL(url)
+
+    // }
 
     async search(input) {
         if (input) {
@@ -55,7 +56,7 @@ class HomePage {
     }
 
 
-    async advancedSearch(cakes, rating, date, s1, s2) {
+    async advancedSearch(cakes, ratings, date, s1, s2) {
 
         let text = `Date of upload:${date}Web pages that have all of these words:${s1}Web pages that have this exact wording or phrase:${s2}  `
         await this.seleniumInfra.clickElement("id", "myBtn")
@@ -63,24 +64,27 @@ class HomePage {
 
         // this.seleniumInfra.clickElement("id","MyBtn")                                           
         // let element = await this.seleniumInfra.findEelem("class","modal-body")
-        await this.seleniumInfra.clickElement('xpath', "//input[@value= 'Chocolate']")
-        await this.seleniumInfra.clickElement('xpath', "//input[@value= 'Mousse']")
-        await this.seleniumInfra.clickElement('xpath', "//input[@value= 'Cheese']")
-        await this.seleniumInfra.clickElement('xpath', "//input[@value= '0-3']")
-        await this.seleniumInfra.clickElement('xpath', "//input[@value= '4']")
-        await this.seleniumInfra.clickElement('xpath', "//input[@value= '5']")
+        for(let cake of cakes )
+        {
+            await this.seleniumInfra.clickElement('xpath', `//input[@value=${cake}]`)
+        }
+        
+        for(let rating of ratings)
+        {
+             await this.seleniumInfra.clickElement('xpath', `//input[@value=${rating}]`)
+        }
         await this.seleniumInfra.write(s1, "id", "input1")
         await this.seleniumInfra.write(date, "className", "inputDate formText")
         await this.seleniumInfra.write(s2, 'id', "input2")
         await this.seleniumInfra.clickElement("id", "myBtnForm")
         let results_Array = await this.seleniumInfra.findElementListBy("className", "searchOutput")
+
         let str = ""
         for (let result of results_Array) {
-            let temp = await this.seleniumInfra.getTextFromElement(null, null, result)
-            str += temp
-
-
-            //    str +=result
+               let temp = await this.seleniumInfra.getTextFromElement(null, null, result)
+               str += temp
+        
+               // str +=result
         }
         console.log(str)
         console.log(text)
@@ -98,17 +102,8 @@ class HomePage {
 } // ckick on buttons and pull outputs are ok !! 
 
 //tester
-async function main() {
-    let home = new HomePage()
-    await home.Get_Url('https://cakes-automation-course.herokuapp.com/index.html')
-    //  await home.search("ABOUT")
-    await home.advancedSearch(null, null, "30/10/2000", "Chocolate", "Choc")
 
-    home.driver.sleep(6000)
-    await home.seleniumInfra.close()
-}
+module.exports = HomePage
 
 
-
-main()
 
