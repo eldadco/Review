@@ -31,7 +31,7 @@ class HomePage {
                     input = "index"
                 }
                 input = input.toLowerCase()
-                if (str ==`https://cakes-automation-course.herokuapp.com/ ${input}.html`) {
+                if (str ==`https://cakes-automation-course.herokuapp.com/${input}.html`) {
                     console.log(" The page that was searched has opened ")
 
                 }
@@ -93,6 +93,7 @@ class HomePage {
             return
         }
         console.log("The output in not affair to the input")
+        await this.seleniumInfra.clickElement('xpath','/html/body/div/header/div/div/div[1]/span')
         // results_Array[0].replace("Date of upload:","")
         // results_Array[1].replace("Web pages that have all of these words:","")
         // results_Array[2].replace("Web pages that have this exact wording or phrase:","")

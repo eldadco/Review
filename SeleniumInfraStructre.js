@@ -72,7 +72,7 @@ class seleniumInfra {
         let element
         try {
             if (elem) {
-                this.driver.sleep(2000)
+                this.driver.sleep(4000)
                 await elem.click()
             }
             else {
@@ -119,7 +119,9 @@ class seleniumInfra {
     async write(data, locatorType, locatorValue, element, fromElement) {
         try {
             if (element) {
+                
                 await element.sendKeys(data)
+
 
             }
             else {
